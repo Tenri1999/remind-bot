@@ -1,4 +1,5 @@
 import { find } from "rambda"
+import { cancelJob } from "node-schedule"
 import { withReminderDB, deleteReminders, readReminders } from "../remind-db"
 import { sendWithBot, notifyWithDeletedReminder } from "../remind-bot"
 import { remindersByAuthorIds } from "../remind-selectors"
@@ -30,6 +31,8 @@ export default (msg: DiscordMessage) => {
         config.remindChannelId,
         reminderToDelete
       )
+
+      cancelJob(`reminder-${reminderToDelete.id.toString()}`)
     }
   }
 }

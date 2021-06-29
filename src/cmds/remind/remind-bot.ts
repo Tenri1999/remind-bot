@@ -44,10 +44,10 @@ export const notifyWithReminder = (
   const embed = {
     color: "#FCD34D",
     title: `:alarm_clock:\u2000${reminder.text}`,
-    description: `<@${reminder.message.authorId}>, you have been reminded :smile:`
+    description: `You have been reminded :smile:`
   }
 
-  channel.send({ embed })
+  channel.send(`<@${reminder.message.authorId}>`, { embed })
 }
 
 export const notifyWithDeletedReminder = (

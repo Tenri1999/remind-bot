@@ -15,7 +15,10 @@ import config from "../../config"
 
 export const scheduleRemindJobs = (reminders: Reminder[]) =>
   forEach(
-    (r) => scheduleJob(fromUnixTime(r.remindAt), () => handleReminder(r)),
+    (r) =>
+      scheduleJob(`reminder-${r.id.toString()}`, fromUnixTime(r.remindAt), () =>
+        handleReminder(r)
+      ),
     reminders
   )
 
